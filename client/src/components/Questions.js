@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-/** Custom Hook */
 import { useFetchQestion } from "../hooks/FetchQuestion";
 import { updateResult } from "../hooks/setResult";
 
@@ -14,6 +12,8 @@ export default function Questions({ onChecked }) {
   const questions = useSelector(
     (state) => state.questions.queue[state.questions.trace]
   );
+
+  const [showSteps, setShowSteps] = useState(false); // state for showing/hiding steps
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,6 +25,11 @@ export default function Questions({ onChecked }) {
     setChecked(i);
     dispatch(updateResult({ trace, checked }));
   }
+
+  // Function to handle showing/hiding steps
+  const handleShowSteps = () => {
+    setShowSteps(!showSteps); // toggle visibility of steps
+  };
 
   // Check if data is still loading or if there's an error
   if (isLoading) return <h3 className="text-light">isLoading</h3>;
@@ -52,7 +57,6 @@ export default function Questions({ onChecked }) {
               id={`q${i}-option`}
               onChange={() => onSelect(i)}
             />
-
             <label className="text-primary" htmlFor={`q${i}-option`}>
               {q}
             </label>
@@ -62,6 +66,23 @@ export default function Questions({ onChecked }) {
           </li>
         ))}
       </ul>
+
+      {/* Button to show/hide steps */}
+      <button onClick={handleShowSteps}>
+        {showSteps ? "Hide Steps" : "Show Steps"}
+      </button>
+
+      {/* Conditionally display the steps */}
+      {showSteps && (
+        <div className="steps">
+          <h3>Steps:</h3>
+          <ol>
+            {questions.steps.map((step, index) => (
+              <li key={index}>{step}</li>
+            ))}
+          </ol>
+        </div>
+      )}
     </div>
   );
 }
