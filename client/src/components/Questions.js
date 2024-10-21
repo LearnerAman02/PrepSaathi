@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFetchQestion } from "../hooks/FetchQuestion";
 import { updateResult } from "../hooks/setResult";
-
+import Steps from "./faqs/Steps";
 export default function Questions({ onChecked }) {
   const [checked, setChecked] = useState(undefined);
   const { trace } = useSelector((state) => state.questions);
@@ -68,21 +68,28 @@ export default function Questions({ onChecked }) {
       </ul>
 
       {/* Button to show/hide steps */}
-      <button onClick={handleShowSteps}>
+      <button
+        onClick={handleShowSteps}
+        style={{
+          padding: "10px 20px",
+          fontSize: "1.2em",
+          fontWeight: "600",
+          color: "#222222", // dark color
+          backgroundColor: "#0DFF92", // primary color
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          transition: "background-color 0.3s ease",
+          marginTop: "15px",
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = "#0be085")}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "#0DFF92")}
+      >
         {showSteps ? "Hide Steps" : "Show Steps"}
       </button>
 
       {/* Conditionally display the steps */}
-      {showSteps && (
-        <div className="steps">
-          <h3>Steps:</h3>
-          <ol>
-            {questions.steps.map((step, index) => (
-              <li key={index}>{step}</li>
-            ))}
-          </ol>
-        </div>
-      )}
+      {showSteps && <Steps steps={questions.steps} />}
     </div>
   );
 }
