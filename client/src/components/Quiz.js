@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Questions from "./Questions";
-
+import { Link } from "react-router-dom";
 import { MoveNextQuestion, MovePrevQuestion } from "../hooks/FetchQuestion";
 import { PushAnswer } from "../hooks/setResult";
 
@@ -66,6 +66,7 @@ export default function Quiz() {
         <button className="btn next" onClick={onNext}>
           Next
         </button>
+        <Link to={"/Dashboard"}>Dashboard</Link>
       </div>
     </div>
   );
