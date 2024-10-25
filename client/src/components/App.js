@@ -92,7 +92,7 @@ function App() {
             </a>
           </li>
           <li style={navLinkStyle}>
-            <a style={linkStyle} href="#contact">
+            <a style={linkStyle} href="#Dashboard">
               Profile
             </a>
           </li>

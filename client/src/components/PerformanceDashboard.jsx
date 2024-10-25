@@ -236,7 +236,6 @@ const PerformanceDashboard = () => {
 
       {/* Heatmap */}
       <HeatmapCard>
-        <h3>Submissions Heatmap</h3>
         <CalendarHeatmap
           startDate={new Date("2024-01-01")}
           endDate={new Date("2024-10-25")}
